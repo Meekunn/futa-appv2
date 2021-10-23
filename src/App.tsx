@@ -1,24 +1,61 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FC, useState, useEffect} from 'react';
+import { BrowserRouter, Route, RouteComponentProps, Switch } from 'react-router-dom'
+import  LinearProgress from '@material-ui/core/LinearProgress'
+import { onAuthStateChanged } from 'firebase/auth'
+import Header from './components/Header'
+import routes from './config/route'
+import Logging from './config/logging'
+import { auth } from './config/firebase'
+import AuthRoute from './components/AuthRoute';
+//import RegisterCustomer from './pages/auth/customer/signup';
+//import auth from 'firebas./pages/auth/signin
+import './styles/components/app.scss';
+import MainHeader from './pages/Mainheader'
 
-function App() {
+
+
+const  App:FC<IApp> = props => {
+
+  const [initializing, setInitializing] = useState<boolean>(true)
+
+  useEffect(() => {
+    onAuthStateChanged(auth, user => {
+      if(user){
+        Logging.info('user detected')
+      } else {
+        Logging.info('No user detected')
+      }
+      setInitializing(false)
+    })
+  }, [])
+
+  if(initializing){
+    return <LinearProgress />
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <MainHeader /> */}
+      <BrowserRouter>
+        <Switch>
+          {routes.map((route, index) => {
+            return(
+             <Route 
+                key={index}
+                path={route.path}
+                exact={route.exact}
+                render={(props: RouteComponentProps<any>) => {
+                  if(route.protected)
+                    {return <AuthRoute><route.component {...props} /></AuthRoute>}
+
+                  return <route.component 
+                  {...props}
+                  {...route.props} />
+              }}
+            />
+          )})}
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }

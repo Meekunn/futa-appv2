@@ -1,0 +1,15 @@
+@use '../abstract/app' as a;
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: a.$background-color;
+    font-family: a.$font;
+    // background-image: url('../../assets/image/signin.jpg');
+    // background-repeat: no-repeat;
+    // background-size: contain;
+    // background-position: center;
+}

@@ -1,0 +1,62 @@
+@use '../abstract/app' as a;
+.box{
+    width: 450px;
+    background-color: whitesmoke;
+    margin-top: 5rem;
+    border-radius: 20px;
+}
+
+.wrapper{
+    padding: 1.5rem;
+}
+
+.heading{
+    margin: 1rem;
+    margin-bottom: 0.3rem;
+    padding-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.typo {
+    font-size: 22px;
+    font-family: a.$font;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+form{
+    padding: 1rem;
+    padding-top: 0.5rem;
+}
+
+.MuiGrid-spacing-xs-1{
+    padding-top: 1rem;
+}
+
+.MuiFormControl-root{
+    margin-bottom: 5px;
+}
+
+.signin-button{
+    border-radius: 8px;
+    background-color: #0E0E52;
+    color: white;
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 700;
+    border: 1px solid #0E0E52;
+    font-size: 18px;
+    padding: 10px 0;
+    width: 100%;
+    margin-top: 1.5rem;
+}
+
+.signin-button:hover{
+    background-color: white;
+    color: a.$logo-color;
+}
+
+p{
+    font-size: 17px;
+    padding: 1rem;
+}

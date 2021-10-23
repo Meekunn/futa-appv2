@@ -1,0 +1,55 @@
+@use '../abstract/app' as a;
+
+.header{
+    position: sticky;
+    top: 0;
+    display: flex;
+    padding: 1em;
+    background-color: rgb(235, 235, 235);
+    font-size: 20px;
+    font-weight: 400;
+    align-items: stretch;
+}
+.wrapper{
+    display: flex;
+    justify-content: space-between;
+    width:100%;
+}
+.logo{
+    display: inline-flex;
+    margin: 0 2rem;
+
+    .style{
+        font-family: a.$logo-font;
+        color: a.$logo-color
+    }
+}
+
+.nav-bar{
+
+    margin: 0 2rem;
+    margin-top: 0.5rem;
+
+    li{
+        list-style: none;
+        display: inline-flex;
+        font-weight: 800;
+        font-size: 20px;
+    }
+    a{
+        text-decoration: none;
+        display: inline-flex;
+        margin: 0 20px;
+        padding: 10px;
+    }
+    button{
+        padding: 5px 10px;
+        margin: 0 20px;
+        border-radius: 12px;
+        border: 2px solid blue;
+        font-size: 17px;
+    }
+}
+
+
+
