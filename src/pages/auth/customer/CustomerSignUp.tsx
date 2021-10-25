@@ -20,6 +20,7 @@ const RegisterCustomer: FC<IPageProps> = (props: any) => {
     const [error, setError] = useState<string>('');
     const [firstName, setFirstName] = useState<string>('')
     const [lastName, setLastName] = useState<string>('')
+    const [phoneNumber, setPhoneNumber] = useState<string>('')
 
     const history = useHistory();
 
@@ -29,8 +30,8 @@ const RegisterCustomer: FC<IPageProps> = (props: any) => {
             firstname: firstName,
             lastname: lastName,
             email: email,
-            // phonenumber: "0906477382",
-            //password:damola2001" "
+            phonenumber: phoneNumber,
+            password: password
         };
         const docRef = await addDoc(collectionRef, payload)
         console.log('The ID is: '+ docRef.id) 
@@ -116,6 +117,19 @@ const RegisterCustomer: FC<IPageProps> = (props: any) => {
                                 placeholder="Joe"
                                 onChange={e=>setLastName(e.target.value)}
                                 value={lastName}
+                                autoFocus
+                                />    
+                            </Grid> 
+                            <Grid item xs={12} sm={12} >
+                                <TextField 
+                                autoComplete="phonenumber"
+                                name="phoneNumber"
+                                fullWidth
+                                id="phoneNumber"
+                                label="Phone Number"
+                                placeholder="08012345679"
+                                onChange={e=>setPhoneNumber(e.target.value)}
+                                value={phoneNumber}
                                 autoFocus
                                 />    
                             </Grid> 

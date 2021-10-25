@@ -18,22 +18,26 @@ const LoginCustomer: FC<IPageProps> = props => {
 
     const history = useHistory()
 
-    const CustomerSignIn = () =>{
+    const customerSignIn = () =>{
         if(error !== '') setError('')
 
         setAuthenticating(true)
 
         signInWithEmailAndPassword(auth, email, password)
-        .then(result => {
-            Logging.info(result)
-            history.push('/')
+        .then(userCredential => {
+            Logging.info(userCredential)
+            history.push('/CustomerDash')
+            console.log('sign in successful')
         })
         .catch(error => {
             Logging.error(error)
             setAuthenticating(false)
             setError(error.message)
+            console.log({error}, "not successful")
         })
+
     }
+
 
     return(
         <Container maxWidth='sm'>
@@ -73,8 +77,8 @@ const LoginCustomer: FC<IPageProps> = props => {
                             </Grid>
                             <button className='signin-button'
                             type="submit"
-                            onClick={()=>CustomerSignIn()}
-                            ><Link to='/CustomerDash'> Sign Up</Link>
+                            onClick={()=>customerSignIn()}
+                            >Sign In
                             </button>
                             <p> Don't have an account?<Link to="/SignUp"> Sign Up </Link> </p>
                             <Link to='/'>Go to Home Page</Link>
