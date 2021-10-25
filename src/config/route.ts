@@ -1,19 +1,36 @@
-import RegisterCustomer from '../pages/auth/customer/signup'
-import LoginCustomer from '../pages/auth/signin'
+import MainPage from '../pages/MainPage'
+import RegisterCustomer from '../pages/auth/customer/CustomerSignUp'
+import LoginCustomer from '../pages/auth/SignIn'
+import CustomerDashboard from '../pages/auth/customer/CustomerDash'
+
 
 const routes: IRoutes[] = [
     {
         path: '/',
         exact: true,
-        component: RegisterCustomer,
-        name: 'signup',
+        component: MainPage,
+        name: 'MainPage',
         protected: false
     },
     {
-        path: '/signin',
+        path: '/SignUp',
+        exact: true,
+        component: RegisterCustomer,
+        name: 'SignUp',
+        protected: false
+    },
+    {
+        path: '/SignIn',
         exact: true,
         component: LoginCustomer,
-        name: 'signin',
+        name: 'SignIn',
+        protected: false
+    },
+    {
+        path: '/CustomerDash',
+        exact: true,
+        component: CustomerDashboard,
+        name: 'CustomerDash',
         protected: false
     }
 ]

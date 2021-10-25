@@ -4,19 +4,19 @@
     position: sticky;
     top: 0;
     display: flex;
-    padding: 1em;
+    padding: 0.5rem;
     background-color: rgb(235, 235, 235);
     font-size: 20px;
     font-weight: 400;
     align-items: stretch;
 }
-.wrapper{
+.wrapper-header{
     display: flex;
     justify-content: space-between;
     width:100%;
+    padding: 0.5rem;
 }
 .logo{
-    display: inline-flex;
     margin: 0 2rem;
 
     .style{
@@ -27,7 +27,7 @@
 
 .nav-bar{
 
-    margin: 0 2rem;
+    margin: 0 1rem;
     margin-top: 0.5rem;
 
     li{
@@ -41,13 +41,14 @@
         display: inline-flex;
         margin: 0 20px;
         padding: 10px;
+        color: #000;
     }
     button{
-        padding: 5px 10px;
-        margin: 0 20px;
+        padding: 5px 15px;
+        margin: 0 15px;
         border-radius: 12px;
         border: 2px solid blue;
-        font-size: 17px;
+        font-size: 19px;
     }
 }
 

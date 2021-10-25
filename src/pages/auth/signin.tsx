@@ -44,7 +44,7 @@ const LoginCustomer: FC<IPageProps> = props => {
                     </div>
                     <form>
                         <Grid container spacing={2}>
-                            <Grid>
+                            <Grid item xs={12} sm={12}>
                                 <TextField 
                                 autoComplete="email"
                                 name="Email"
@@ -74,11 +74,12 @@ const LoginCustomer: FC<IPageProps> = props => {
                             <button className='signin-button'
                             type="submit"
                             onClick={()=>CustomerSignIn()}
-                            > Sign Up
+                            ><Link to='/CustomerDash'> Sign Up</Link>
                             </button>
-                            {/* <p> Don't have an account? </p>
-                            <Link to="/"> Sign Up </Link> */}
-                            <p><Link to="/"> Forgot Password? </Link></p>
+                            <p> Don't have an account?<Link to="/SignUp"> Sign Up </Link> </p>
+                            <Link to='/'>Go to Home Page</Link>
+                            
+                            {/* <p><Link to="/"> Forgot Password? </Link></p> */}
                         </Grid> 
                     </form>
                 </div>

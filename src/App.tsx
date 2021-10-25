@@ -2,7 +2,7 @@ import React, { FC, useState, useEffect} from 'react';
 import { BrowserRouter, Route, RouteComponentProps, Switch } from 'react-router-dom'
 import  LinearProgress from '@material-ui/core/LinearProgress'
 import { onAuthStateChanged } from 'firebase/auth'
-import Header from './components/Header'
+import MainHeader from './components/MainHeader'
 import routes from './config/route'
 import Logging from './config/logging'
 import { auth } from './config/firebase'
@@ -10,7 +10,7 @@ import AuthRoute from './components/AuthRoute';
 //import RegisterCustomer from './pages/auth/customer/signup';
 //import auth from 'firebas./pages/auth/signin
 import './styles/components/app.scss';
-import MainHeader from './pages/Mainheader'
+import Header from './components/Header'
 
 
 

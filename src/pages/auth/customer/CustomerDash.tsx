@@ -1,14 +1,36 @@
 import React from 'react';
-import Container from '@material-ui/core/Container'
-import Box from '@material-ui/core/Box'
-import Grid from '@material-ui/core/Grid'
-import TextField from '@material-ui/core/TextField'
-import Image from '../../../assets/image/signin.jpg'
-import '../../../styles/customer/dashboard.scss'
+import { Link, useHistory } from 'react-router-dom';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import Logging from '../../../config/logging';
+import Container from '@material-ui/core/Container';
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import { auth } from '../../../config/firebase';
+import Image from '../../../assets/image/signin.jpg';
+import '../../../styles/customer/dashboard.scss';
+import Header from '../../../components/Header';
 
 
 const CustomerDashboard = () => {
+
+    const history = useHistory();
+
+    const logOut = () => {
+    signOut(auth)
+    .then((result:any) => {
+        console.log('Signed out!')
+        Logging.info(result)
+        history.push('/MainPage')
+    }).catch((error: any) => {
+        // An error happened.
+        console.log('Error in signing out')
+    });
+   } 
+
     return(
+        <div>
+        <Header />
         <Container maxWidth='sm'>
             <Box>
                 <div className='wrapper'>
@@ -67,11 +89,13 @@ const CustomerDashboard = () => {
                     <div className='others'>
                         <a><li>Change Password</li></a>
                         <a><li>Report</li></a>
-                        <button className='log-out'>Logout</button>
+                        <button className='log-out'
+                        onClick={()=>logOut()}><Link to='/'>Logout</Link></button>
                     </div>
                 </div>
             </Box>
         </Container>
+        </div>
     )
 }
 
