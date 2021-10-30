@@ -15,23 +15,44 @@ interface IRoutes {
     props?: any;
 }
 
-interface ICustomers {
-    id: string;
+interface ICustomerBasic {
     firstname: string;
     lastname: string;
-    email: string;
-    password: string;
-    phonenumber: number;
+    email:string;
+    phonenumber: string;
 }
 
-interface IVendors {
+interface ICustomers extends ICustomerBasic {
     id: string;
+    password: string;
+}
+
+interface IVendorBasic {
     firstname: string;
     lastname: string;
     email: string;
-    password: string;
-    phonenumber: number;
+    phonenumber: string;
     brandname: string;
     services: string;
     location: string;
 }
+
+interface IVendors extends IVendorBasic{
+    id: string;
+    password: string;
+}
+
+// interface IVendors [] =  {
+//     firstname: string;
+//     lastname: string;
+//     email: string;
+//     phonenumber: string;
+//     brandname: string;
+//     services: string;
+//     location: string;
+// }
+
+interface State {
+    password: string;
+    showPassword: boolean;
+  }

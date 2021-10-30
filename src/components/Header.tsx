@@ -1,34 +1,36 @@
-import React, {SyntheticEvent, useState} from 'react'
-import Tabs from '@material-ui/core/Tabs'
-import Tab from '@material-ui/core/Tab'
+import React from 'react'
+import { Link } from 'react-router-dom'
 import RoomIcon from '@material-ui/icons/Room'
 import StoreIcon from '@material-ui/icons/Store'
 import SearchIcon from '@material-ui/icons/Search'
 import PersonIcon from '@material-ui/icons/Person'
+import '../styles/components/header.scss'
 
-const MainHeader =() => {
-
-    const [value, setValue] = useState<number>(0)
-
-    const handleChange = (event:SyntheticEvent<EventTarget>, newValue: number) => {
-        setValue(newValue)
-    }
+const Header =() => {
 
     return(
         <div className='header'>
-            <div className='wrapper'>
+            <div className='header-wrapper'>
                 <div className='logo'>
                     <h1><span className='style'>f</span>uta<span className='style'>K</span>onnect</h1>
                 </div>
-                <Tabs value={value} onChange={handleChange} aria-label="icon label tabs example">
-                    <Tab icon={<RoomIcon />} label="FIND OFFICE" />
-                    <Tab icon={<StoreIcon />} label="VENDORS" />
-                    <Tab icon={<SearchIcon />} label="SEARCH" />
-                    <Tab icon={<PersonIcon />} label="DASHBOARD" />
-                </Tabs>
+                <div className='nav-bar'>
+                    <div className='tabs'>
+                        <Link to='/' ><RoomIcon/><li>FIND OFFICE</li></Link>
+                    </div>
+                    <div className='tabs'>
+                        <Link to='/HomePage'><StoreIcon/><li>VENDORS</li></Link>
+                    </div>
+                    <div className='tabs'>
+                        <Link to='/'><SearchIcon/><li>SEARCH</li></Link>
+                    </div>
+                    <div className='tabs'>
+                        <Link to='/CustomerDash'><PersonIcon/><li>DASHBOARD</li></Link>
+                    </div>
+                </div>
             </div>
         </div>
     )
 }
 
-export default MainHeader;
+export default Header;

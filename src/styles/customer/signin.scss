@@ -1,64 +1,133 @@
 @use '../abstract/app' as a;
-.box{
-    width: 450px;
-    background-color: whitesmoke;
-    margin-top: 5rem;
-    border-radius: 20px;
-}
 
-.wrapper{
+.signin-wrapper{
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
+    background-color: #fffdfd;
+    border-radius: 20px;
 }
 
-.heading{
-    margin: 1rem;
-    margin-bottom: 0.3rem;
-    padding-top: 1rem;
+.signin-heading{
+    background-color: a.$background;
+    font-family: a.$font;
+    color: a.$font-color;
+    margin: 1rem 0.5rem;
+    padding: 0.5rem;
     display: flex;
     justify-content: space-between;
+
+    h1{
+        font-weight: 800;
+        line-height: 1.5;
+        font-size: 28px;
+        background-color: a.$background;
+    }
 }
 
-.typo {
-    font-size: 22px;
-    font-family: a.$font;
-    font-weight: 700;
-    line-height: 1.5;
-}
-
-form{
+.form{
     padding: 1rem;
     padding-top: 0.5rem;
+    background-color: a.$background;
 }
 
-.MuiGrid-spacing-xs-1{
-    padding-top: 1rem;
+.big-grid{
+    background-color: a.$background;
+}
+
+.grid{
+    background-color: a.$background;
+}
+
+.MuiGrid-spacing-xs-2 > .MuiGrid-item{
+    background-color: a.$background;
+    padding: 8px;
+}
+
+.textfield{
+    margin-bottom: 5px;
+    background-color: a.$background;
 }
 
 .MuiFormControl-root{
-    margin-bottom: 5px;
+    label{
+        color: a.$font-color;
+        font-family: a.$font;
+        font-weight: 600;
+    }
+    input{
+        color: a.$font-color;
+        font-family: a.$font;
+    }
+}
+
+.MuiInputBase-root{
+    color: a.$font-color;
+    background-color: a.$background;
+    font-family: a.$font;
+} 
+
+.MuiFormLabel-root{
+    color: a.$background-color;
+    background-color: a.$background;
+    font-family: a.$font;
+}
+.MuiInput-underline::before{
+    border-bottom: 2px solid grey;
+}
+
+.MuiInput-underline::after{
+    border-bottom: 2px solid a.$font-color;
 }
 
 .signin-button{
-    border-radius: 8px;
-    background-color: #0E0E52;
-    color: white;
-    font-family: "Josefin Sans", sans-serif;
-    font-weight: 700;
-    border: 1px solid #0E0E52;
-    font-size: 18px;
+    color: a.$font-color;
     padding: 10px 0;
     width: 100%;
-    margin-top: 1.5rem;
+    margin: 4px 0;
+    background-color: a.$background;
+    border-radius: 12px;
+    border: 2px solid a.$font-color;
+    font-size: 18px;
+    font-weight: 800;
+    font-family: a.$font;
 }
 
 .signin-button:hover{
-    background-color: white;
-    color: a.$logo-color;
+    background-color: a.$font-color;
+    color: a.$background;
+}
+
+.links{
+    background-color: a.$background;
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
 }
 
 p{
-    font-size: 17px;
-    padding: 1rem;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 0;
+    margin: 0;
+    margin-top: 15px;
+    background-color: a.$background;
+    color: a.$font-color;
+    width: 100%;
+    text-align: center;
+
+    a{
+        margin: 0;
+        padding: 0;
+        color: a.$font-color
+    }
+}
+a{
+    font-size: 15px;
+    padding: 0;
+    margin: 3px 0;
+    background-color: a.$background;
+    color: a.$font-color;
 }

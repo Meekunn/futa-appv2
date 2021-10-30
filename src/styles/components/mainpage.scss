@@ -1,5 +1,5 @@
-// @use '../../styles/abstract/app' as a;
+@use '../../styles/abstract/app' as a;
 
-// *{
-//     background-image: url(../../assets/image/image1.jpg);
-// }
+*{
+    background-color: a.$background-color;
+}

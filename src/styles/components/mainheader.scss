@@ -1,54 +1,73 @@
 @use '../abstract/app' as a;
 
 .mainheader{
-    background-image: none;
     position: sticky;
     top: 0;
     display: flex;
     padding: 0.5rem;
-    background-color: rgb(235, 235, 235);
-    font-size: 20px;
-    font-weight: 400;
-    align-items: stretch;
+    background-color: a.$background;
 }
 .mainheader-wrapper{
+    background-color: a.$background;
     display: flex;
     justify-content: space-between;
     width:100%;
     padding: 0.5rem;
 }
 .logo{
+    background-color: a.$background;
     margin: 0 2rem;
+    margin-top: 7px;
+    font-family: a.$font;
 
+    h1{
+        background-color: a.$background;
+        color: a.$font-color;
+        font-weight: 800;
+        font-size: 25px;
+    }
     .style{
+        background-color: a.$background;
         font-family: a.$logo-font;
-        color: a.$logo-color
+        color: a.$logo-color;
+        font-size: 30px;
     }
 }
 
 .nav-bar{
 
     margin: 0 1rem;
-    margin-top: 0.5rem;
+    background-color: a.$background;
+    font-family: a.$font;
 
     li{
         list-style: none;
         display: inline-flex;
         font-weight: 800;
         font-size: 20px;
+        background-color: a.$background;
+    }
+    li:hover{
+        color: a.$logo-color;
     }
     a{
         text-decoration: none;
         display: inline-flex;
         margin: 0 20px;
-        padding: 10px;
-        color: #000;
+        background-color: a.$background;
+        color: a.$font-color;
     }
     button{
-        padding: 5px 15px;
-        margin: 0 15px;
+        background-color: a.$background;
+        padding: 7px 15px;
         border-radius: 12px;
-        border: 2px solid blue;
-        font-size: 19px;
+        border: 2px solid a.$font-color;
+        font-size: 18px;
+        font-weight: 800;
+        font-family: a.$font;
+    }
+    button:hover{
+        background-color: a.$font-color;
+        color: a.$background;
     }
 }

@@ -1,7 +1,13 @@
 import MainPage from '../pages/MainPage'
 import RegisterCustomer from '../pages/auth/customer/CustomerSignUp'
-import LoginCustomer from '../pages/auth/SignIn'
+import LoginCustomer from '../pages/auth/customer/CustomerSignIn'
 import CustomerDashboard from '../pages/auth/customer/CustomerDash'
+import EditCustomerInfo from '../pages/auth/customer/CustomerEdit'
+import RegisterVendor from '../pages/auth/vendor/VendorSignUp'
+import LoginVendor from '../pages/auth/vendor/VendorSignIn' 
+import VendorDashboard from '../pages/auth/vendor/VendorDash'
+import EditVendorInfo from '../pages/auth/vendor/VendorEdit'
+import HomePage from '../pages/HomePage'
 
 
 const routes: IRoutes[] = [
@@ -13,17 +19,17 @@ const routes: IRoutes[] = [
         protected: false
     },
     {
-        path: '/SignUp',
+        path: '/CustomerSignUp',
         exact: true,
         component: RegisterCustomer,
-        name: 'SignUp',
+        name: 'CustomerSignUp',
         protected: false
     },
     {
-        path: '/SignIn',
+        path: '/CustomerSignIn',
         exact: true,
         component: LoginCustomer,
-        name: 'SignIn',
+        name: 'CustomerSignIn',
         protected: false
     },
     {
@@ -32,7 +38,54 @@ const routes: IRoutes[] = [
         component: CustomerDashboard,
         name: 'CustomerDash',
         protected: false
+    },
+    {
+        path: '/CustomerEdit',
+        exact: true,
+        component: EditCustomerInfo,
+        name: 'CustomerEdit',
+        protected: false
+    },
+    {
+        path: '/VendorSignUp',
+        exact: true,
+        component: RegisterVendor,
+        name: 'VendorSignUp',
+        protected: false
+    },
+    {
+        path: '/VendorSignIn',
+        exact: true,
+        component: LoginVendor,
+        name: 'VendorSignIn',
+        protected: false
+    },
+    {
+        path: '/VendorDash',
+        exact: true,
+        component: VendorDashboard,
+        name: 'VendorDash',
+        protected: false
+    },
+    {
+        path: '/VendorEdit',
+        exact: true,
+        component: EditVendorInfo,
+        name: 'VendorEdit',
+        protected: false
+    },
+    {
+        path: '/HomePage',
+        exact: true,
+        component: HomePage,
+        name: 'HomePage',
+        protected: false
     }
 ]
 
 export default routes;
+
+//npm install -g firebase-tools
+//yarn add firebase-tools
+//$ firebase init
+//$ firebase deploy
