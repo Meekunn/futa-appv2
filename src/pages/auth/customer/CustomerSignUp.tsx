@@ -54,6 +54,7 @@ const RegisterCustomer: FC<IPageProps> = (props: any) => {
             phonenumber
         };
         const setDocRef = await setDoc(docRef, payload)
+        console.log(setDocRef)
     }
 
     const verifyEmail = (user: any) => {
@@ -255,6 +256,7 @@ const RegisterCustomer: FC<IPageProps> = (props: any) => {
                         </Grid>
                         <button className='signup-button'
                         onClick={customerSignUp}
+                        disabled={signUp}
                         >Sign Up
                         </button>
                         <button className='signup-button' onClick={switchToVendor}>Vendor?</button>

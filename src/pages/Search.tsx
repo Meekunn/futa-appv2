@@ -29,9 +29,9 @@ const  SearchPage = () => {
 
     const handleSearch = (val: any) => {
       setSearchBrandname(trimText(val))
-      setSearchLocation(trimText(val))
       if(searchBrandname || searchLocation === ""){
         return setSearchOutput([])
+        console.log(searchOutput)
       }
     }
   

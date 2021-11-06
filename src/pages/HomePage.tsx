@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import { onSnapshot, collection } from 'firebase/firestore'
-import { db, auth } from '../config/firebase'
+import { db } from '../config/firebase'
 import Image from '../assets/image/signin.jpg'
 import Container from '@material-ui/core/Container'
-//import Box from '@material-ui/core/Box'
 import '../styles/components/homepage.scss'
 
 const HomePage = () => {
@@ -39,7 +38,7 @@ const HomePage = () => {
                     <div className='container'>
                     <div className='profile'>
                         <div className='img-container'>
-                            <img src={Image} />
+                            <img src={Image} alt='profile-pic' />
                         </div>
                         <div className='sub-wrapper'>
                             <h1>{vendor.brandname}</h1>

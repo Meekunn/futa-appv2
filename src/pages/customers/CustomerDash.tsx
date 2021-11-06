@@ -3,7 +3,6 @@ import { Link, useHistory } from 'react-router-dom';
 import { onAuthStateChanged, signOut, updatePassword, sendPasswordResetEmail } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { db, auth } from '../../config/firebase';
-import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';

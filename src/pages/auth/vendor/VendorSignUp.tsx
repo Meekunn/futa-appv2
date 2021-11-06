@@ -58,6 +58,7 @@ const RegisterVendor: FC<IVendors> = props => {
             services
         };
         const setDocRef = await setDoc(docRef, payload)
+        console.log(setDocRef)
     }
 
     const verifyEmail = (user: any) => {
