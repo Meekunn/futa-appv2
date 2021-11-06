@@ -1,0 +1,103 @@
+@use '../abstract/app' as a;
+
+.dash-wrapper{
+    margin: 2rem;
+    background-color: a.$background-color;
+}
+
+.dash-heading{
+    margin: 5px;
+    padding: 1rem;
+    background-color: a.$background-color;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .img-container{
+        background-color: a.$background-color;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        
+        img{
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 15px;
+            border: 2px solid a.$font-color;
+        }
+    }
+    
+    h1{
+        font-size: 20px;
+        background-color: a.$background-color;
+        color: a.$background;
+        width: 100%;
+        text-align: center;
+        font-weight: 500;
+    }
+    
+    .edit-link{
+        background-color: a.$background-color;
+        color:a.$background;
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: end;
+        margin: 2px;
+        padding: 3px;
+    
+        .MuiSvgIcon-root{
+            background-color: a.$background-color;
+            border: none;
+            font-size: 25px;
+            padding: 2px;
+            fill: a.$background;
+        }
+    }
+}
+
+.form-container{
+    margin: 10px;
+}
+
+.others{
+    margin: 1rem;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.other-link{
+    background-color: a.$background-color;
+    color: a.$background;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+
+    li{
+        list-style: none;
+        font-size: 15px;
+        color: a.$background;
+        background-color: a.$background-color;
+        font-weight: 400;
+    }
+}
+
+.log-out{
+    padding: 10px 0;
+    width: 100%;
+    margin: 4px 0;
+    background-color: a.$background;
+    color: a.$background-color;
+    border-radius: 10px;
+    border: 1px solid a.$background;
+    font-size: 18px;
+    font-weight: 800;
+    font-family: a.$font;
+}
+.log-out:hover{
+    background-color: a.$background-color;
+    color: a.$background;
+}

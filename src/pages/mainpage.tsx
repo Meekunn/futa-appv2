@@ -1,6 +1,6 @@
-import React from 'react';
+//import React from 'react';
 import MainHeader from '../components/MainHeader';
-import '../styles/components/mainpage.scss'
+import '../styles/pages/mainpage.scss'
 
 const MainPage = () => {
     return(

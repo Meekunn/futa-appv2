@@ -1,18 +1,20 @@
 import React from 'react';
 import { FC , useState } from 'react';
 import { Link, useHistory } from 'react-router-dom'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
 import { setDoc, doc } from 'firebase/firestore'
 import { db, auth } from '../../../config/firebase'
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
-import '../../../styles/customer/signup.scss'
-// import InputAdornment from '@material-ui/core/InputAdornment'
-// import IconButton from '@material-ui/core/IconButton'
-// import Visibility from '@material-ui/icons/Visibility'
-// import VisibilityOff from '@material-ui/icons/VisibilityOff'
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel'
+import Input from '@material-ui/core/Input'
+import InputAdornment from '@material-ui/core/InputAdornment'
+import Visibility from '@material-ui/icons/Visibility'
+import VisibilityOff from '@material-ui/icons/VisibilityOff'
+import '../../../styles/pages/signup.scss'
 
 
 const RegisterCustomer: FC<IPageProps> = (props: any) => {
@@ -25,6 +27,8 @@ const RegisterCustomer: FC<IPageProps> = (props: any) => {
     const [firstname, setFirstname] = useState<string>('')
     const [lastname, setLastname] = useState<string>('')
     const [phonenumber, setPhonenumber] = useState<string>('')
+    const [showpass, setShowpass] = useState<boolean>(true)
+    const [showconfirm, setShowconfirm] = useState<boolean>(true)
 
     const history = useHistory();
 
@@ -33,24 +37,38 @@ const RegisterCustomer: FC<IPageProps> = (props: any) => {
         console.log('switched to vendor!')
     }
 
+    const handleShowPassword = () => {
+        setShowpass(!showpass)
+    }
+
+    const handleShowConfirm = () => {
+        setShowconfirm(!showconfirm)
+    }
+
     const handleNew = async (id: any) => {
         const docRef = doc(db, "customers", id) 
          const payload = {
             firstname,
             lastname,
             email,
-            phonenumber,
-            password
+            phonenumber
         };
         const setDocRef = await setDoc(docRef, payload)
     }
 
+    const verifyEmail = (user: any) => {
+        if(user) {
+            sendEmailVerification(user)
+            history.push('/verifyEmail')
+        }
+    }
 
     const customerSignUp = (e: any) => {
         e.preventDefault();
 
         if(password !== confirm)
             setError('Password does not match.')
+            alert('Password does not match')
 
         if (error !== '')
             setError('');
@@ -58,21 +76,31 @@ const RegisterCustomer: FC<IPageProps> = (props: any) => {
         setSignUp(true);
         createUserWithEmailAndPassword(auth, email, password)
         .then( async (result:any) => {   
-            await handleNew(result.user.uid);
-            history.replace('/CustomerDash'); 
+            const user = auth.currentUser
+            if (user){
+                verifyEmail(user)
+                await handleNew(result.user.uid)
+                if (user.emailVerified){
+                    history.replace('/CustomerDash')
+                } 
+                else {
+                    history.replace('/verifyemail')
+                }
+            } 
         })
         .catch((error:any) => {
-            //Logging.error(error);
 
             if(error.code === 'auth/weak-password'){
                 setError('Please enter a strong password')
-                //alert('weak pass')
+                alert('Please enter a strong password')
             } 
             else if (error.code === 'auth/email-already-in-use') {
                 setError('Email is already in use')
+                alert('Email is already in use')
             } 
             else{
                 setError('Unable to Sign Up. Try again later.')
+                alert('Ooops, try again later')
                 console.log({error})
             }
 
@@ -97,10 +125,10 @@ const RegisterCustomer: FC<IPageProps> = (props: any) => {
     
     return(
         <Container maxWidth="sm">
-            <Box sx={{ width: 450, bgcolor: '#fffdfd', borderRadius: 20, display: 'flex',justifyContent: 'center', alignItems: 'center' }}>
+            <Box sx={{ width: 500, bgcolor: '#fffdfd', borderRadius: 20, display: 'flex',justifyContent: 'center', alignItems: 'center' }}>
                 <div className='signup-wrapper' >
                     <div className='signup-heading'>
-                        <h1>Sign Up</h1>
+                        <h1 className='signup-header'>Sign Up</h1>
                     </div>
                     <div className='form'>
                         <Grid container spacing={1} className='big-grid'>
@@ -177,67 +205,62 @@ const RegisterCustomer: FC<IPageProps> = (props: any) => {
                                 />    
                             </Grid> 
                             <Grid item xs={12} sm={12} className='grid' style={{backgroundColor: '#fffdfd'}}>
-                                <TextField 
-                                style= {{backgroundColor: '#fffdfd' }}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                autoComplete="current-password"
-                                name="password"
-                                required
-                                fullWidth
-                                id="password"
-                                label="Password"
-                                type='password'
-                                placeholder="********"
-                                autoFocus
-                                onChange={e=> setPassword(e.target.value)}
-                                value={password}
-                                // onChange={e => {setPassword(e.target.value); handleChange('password')}}
-                                //value={values.password}
-                                //type={values.showPassword ? 'text' : 'password'}
-                                // endAdornment={
-                                //     <InputAdornment position="end">
-                                //       <IconButton
-                                //         aria-label="toggle password visibility"
-                                //         onClick={handleClickShowPassword}
-                                //         onMouseDown={handleMouseDownPassword}
-                                //         edge="end"
-                                //       >
-                                //         {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                                //       </IconButton>
-                                //     </InputAdornment>
-                                //   }
-                                />    
+                                <FormControl style={{ width: '100%', backgroundColor: '#fffdfd'}} >
+                                    <InputLabel htmlFor="standard-adornment-password" shrink={true} >Password</InputLabel>
+                                    <Input
+                                    style= {{backgroundColor: '#fffdfd' }}
+                                    id="standard-adornment-password"
+                                    type={showpass? 'password': 'text'}
+                                    placeholder="********"
+                                    required
+                                    onChange={e=>setPassword(e.target.value)}
+                                    value={password}
+                                    autoFocus
+                                    endAdornment={
+                                        <InputAdornment position='end'>
+                                            <button
+                                            style={{padding: '5px', backgroundColor: '#fffdfd', outline: 'none', border: 'none'}}
+                                            onClick={() => handleShowPassword()}
+                                            >{showpass? <Visibility /> : <VisibilityOff />}
+                                            </button>
+                                        </InputAdornment>
+                                    }
+                                    />
+                                </FormControl> 
                             </Grid> 
                             <Grid item xs={12} sm={12} className='grid' style={{backgroundColor: '#fffdfd'}} >
-                                <TextField 
-                                style= {{backgroundColor: '#fffdfd' }}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                autoComplete="current-password"
-                                name="confirmPassword"
-                                required
-                                fullWidth
-                                id="confirmpassword"
-                                type="password"
-                                label="Confirm Password"
-                                placeholder="********"
-                                autoFocus
-                                onChange={e => setConfirm(e.target.value)}
-                                value={confirm}
-                                /> 
-                            </Grid> 
+                                <FormControl style={{ width: '100%', backgroundColor: '#fffdfd'}} >
+                                    <InputLabel htmlFor="standard-adornment-password" shrink={true} >Confirm Password</InputLabel>
+                                    <Input
+                                    style= {{backgroundColor: '#fffdfd' }}
+                                    id="standard-adornment-password"
+                                    type={showconfirm? 'password': 'text'}
+                                    placeholder="********"
+                                    required
+                                    onChange={e=>setConfirm(e.target.value)}
+                                    value={confirm}
+                                    autoFocus
+                                    endAdornment={
+                                        <InputAdornment position='end'>
+                                            <button
+                                            style={{padding: '5px', backgroundColor: '#fffdfd', outline: 'none', border: 'none'}}
+                                            onClick={() => handleShowConfirm()}
+                                            >{showconfirm? <Visibility /> : <VisibilityOff />}
+                                            </button>
+                                        </InputAdornment>
+                                    }
+                                    />
+                                </FormControl> 
+                            </Grid>  
                         </Grid>
                         <button className='signup-button'
                         onClick={customerSignUp}
                         >Sign Up
                         </button>
                         <button className='signup-button' onClick={switchToVendor}>Vendor?</button>
-                        <p>Already have an account?<Link to="/CustomerSignIn"> Sign In</Link></p>
+                        <p>Already have an account?<Link to="/CustomerSignIn" className='p-link'> Sign In</Link></p>
                         <div className='links'>
-                            <Link to='/'>&#8592; Go to Home Page</Link>
+                            <Link to='/' className='nav-link'>&#8592; Go to Home Page</Link>
                         </div>
                     </div>
                 </div>
@@ -247,27 +270,3 @@ const RegisterCustomer: FC<IPageProps> = (props: any) => {
 }
 
 export default RegisterCustomer;
-
-
-// export default function InputAdornments () {
-//     const [values, setValues] = useState<State>({
-//       password: '',
-//       showPassword: false,
-//     });
-
-//     const handleChange = (prop: keyof State) => (event: ChangeEvent<HTMLInputElement>) => {
-//         setValues({ ...values, [prop]: event.target.value });
-//     };
-
-//     const handleClickShowPassword = () => {
-//         setValues({
-//         ...values,
-//         showPassword: !values.showPassword,
-//         });
-//     }
-// }
-
-                                
-// const handleMouseDownPassword = (event:MouseEvent<HTMLButtonElement>) => {
-    //event.preventDefault();
- //};

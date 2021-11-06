@@ -1,0 +1,82 @@
+@use '../abstract/app' as a;
+
+.edit-wrapper{
+    margin: 2rem;
+    background-color: a.$background-color;
+}
+
+h1{
+    font-size: 35px;
+    background-color: a.$background-color;
+    color: a.$background;
+    width: 100%;
+    text-align: center;
+    font-weight: 500;
+}
+
+.form-container{
+    margin: 10px;
+}
+
+// .MuiFormControl-root {
+//     background-color: a.$background-color;
+
+//     .label{
+//         color: a.$background;
+//         background-color: a.$background-color;
+//         font-weight: 400;
+//     }
+//     .MuiInputBase-root{
+//         background-color: a.$background-color;
+//         color: a.$background;
+//     }
+//     // .input{
+//     //     background-color: a.$background-color;
+//     //     color: a.$background;
+//     //     padding: 10px;
+//     //     font-weight: 500;
+//     // }
+//     .MuiInput-underline::before{
+//         border-bottom: 1px solid a.$background;
+//     }
+//     .MuiInput-underline::after{
+//         border-bottom: 1px solid a.$background;
+//     }
+// }
+
+.back-link{
+    text-decoration: none;
+    background-color: a.$background-color;
+    color: a.$background;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+
+    li{
+        list-style: none;
+        font-size: 15px;
+        color: a.$background;
+        background-color: a.$background-color;
+        font-weight: 400;
+    }
+}
+
+.save-btn{
+    padding: 10px 0;
+    width: 100%;
+    margin: 4px 0;
+    background-color: a.$background;
+    color: a.$background-color;
+    border-radius: 10px;
+    border: 1px solid a.$background;
+    font-size: 18px;
+    font-weight: 800;
+    font-family: a.$font;
+}
+.save-btn:hover{
+    background-color: a.$background-color;
+    color: a.$background;
+}

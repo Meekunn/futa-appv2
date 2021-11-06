@@ -35,22 +35,13 @@ interface IVendorBasic {
     brandname: string;
     services: string;
     location: string;
+    id: string;
+    bio: string;
 }
 
 interface IVendors extends IVendorBasic{
-    id: string;
     password: string;
 }
-
-// interface IVendors [] =  {
-//     firstname: string;
-//     lastname: string;
-//     email: string;
-//     phonenumber: string;
-//     brandname: string;
-//     services: string;
-//     location: string;
-// }
 
 interface State {
     password: string;

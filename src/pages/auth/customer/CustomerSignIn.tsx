@@ -2,11 +2,17 @@ import React, { FC, useState} from 'react'
 import { Link, useHistory} from 'react-router-dom'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../../config/firebase'
-import TextField from '@material-ui/core/TextField';
-import Container from '@material-ui/core/Container';
+import TextField from '@material-ui/core/TextField'
+import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
-import '../../../styles/customer/signin.scss'
+import InputAdornment from '@material-ui/core/InputAdornment'
+import FormControl from '@material-ui/core/FormControl'
+import InputLabel from '@material-ui/core/InputLabel'
+import Input from '@material-ui/core/Input'
+import Visibility from '@material-ui/icons/Visibility'
+import VisibilityOff from '@material-ui/icons/VisibilityOff'
+import '../../../styles/pages/signin.scss'
 
 const LoginCustomer: FC<IPageProps> = props => {
 
@@ -14,40 +20,42 @@ const LoginCustomer: FC<IPageProps> = props => {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [error, setError] = useState<string>('')
+    const [showpass, setShowpass] = useState<boolean>(true)
 
     const history = useHistory()
+
+    const handleShowPassword = () => {
+        setShowpass(!showpass)
+    }
 
     const switchToVendor = () => {
         history.replace('/VendorSignIn')
     }
 
     const customerSignIn = (e: any) =>{
-        e.preventDefault();
-        if (error !== '') setError('');
+        e.preventDefault()
+        if (error !== '') setError('')
 
-        setAuthenticating(true);
+        setAuthenticating(true)
 
         signInWithEmailAndPassword(auth, email, password)
         .then((result:any) => {
-            //Logging.info(result);
-            history.push('/CustomerDash');
-            console.log('succesful', {result})
+            history.push('/CustomerDash')
         })
         .catch((error:any) => {
-            //Logging.error(error);
-            setAuthenticating(false);
-            setError(error.message);
-            console.log('unsuccessful', {error})
-        });
+            setAuthenticating(false)
+            setError(error.message)
+            alert('Incorrect Email or Password')
+        })
     }
 
 
     return(
         <Container maxWidth='sm'>
-            <Box sx={{ width: 450, mt: 10, bgcolor: '#fffdfd', borderRadius: 20, display: 'flex',justifyContent: 'center', alignItems: 'center' }}>
+            <Box sx={{ bgcolor: '#fffdfd', borderRadius: 5, display: 'flex',justifyContent: 'center', alignItems: 'center' }}>
                 <div className='signin-wrapper'>
                     <div className='signin-heading'>
-                        <h1>Sign In</h1>
+                        <h1 className='signin-header'>Sign In</h1>
                     </div>
                     <div className='form'>
                         <Grid container spacing={2} className='big-grid'>
@@ -69,32 +77,38 @@ const LoginCustomer: FC<IPageProps> = props => {
                                 />    
                             </Grid> 
                             <Grid item xs={12} sm={12} style={{backgroundColor: '#fffdfd'}}>
-                                <TextField 
-                                style= {{backgroundColor: '#fffdfd' }}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                autoComplete="new-password"
-                                name="password"
-                                fullWidth
-                                id="password"
-                                type='password'
-                                label="Enter Password"
-                                placeholder="********"
-                                onChange={e=>setPassword(e.target.value)}
-                                value={password}
-                                autoFocus
-                                />    
+                                <FormControl style={{ width: '100%', backgroundColor: '#fffdfd'}} >
+                                    <InputLabel htmlFor="standard-adornment-password" shrink={true} >Password</InputLabel>
+                                    <Input
+                                    style= {{backgroundColor: '#fffdfd' }}
+                                    id="standard-adornment-password"
+                                    type={showpass? 'password': 'text'}
+                                    placeholder="********"
+                                    onChange={e=>setPassword(e.target.value)}
+                                    value={password}
+                                    autoFocus
+                                    endAdornment={
+                                        <InputAdornment position='end'>
+                                            <button
+                                            style={{padding: '5px', backgroundColor: '#fffdfd', outline: 'none', border: 'none'}}
+                                            onClick={() => handleShowPassword()}
+                                            >{showpass? <Visibility /> : <VisibilityOff />}
+                                            </button>
+                                        </InputAdornment>
+                                    }
+                                    />
+                                </FormControl>  
                             </Grid>
                             <button className='signin-button'
+                            disabled={authenticating}
                             onClick={customerSignIn}
                             >Sign In
                             </button>
                             <button className='signin-button' onClick={switchToVendor}>Sign In as Vendor</button>
-                            <p>Don't have an account?<Link to="/CustomerSignUp"> Sign Up</Link></p>
+                            <p>Don't have an account?<Link to="/CustomerSignUp" className='p-link'> Sign Up</Link></p>
                             <div className='links'>
-                                <Link to='/'>&#8592; Go to Home Page</Link>
-                                <Link to=''>Forgot Password?</Link>
+                                <Link to='/' className='nav-link'>&#8592; Go to Home Page</Link>
+                                <Link to='/ForgotPass' className='nav-link'>Forgot Password?</Link>
                             </div>
                         </Grid> 
                     </div>

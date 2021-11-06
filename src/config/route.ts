@@ -1,13 +1,17 @@
 import MainPage from '../pages/MainPage'
 import RegisterCustomer from '../pages/auth/customer/CustomerSignUp'
 import LoginCustomer from '../pages/auth/customer/CustomerSignIn'
-import CustomerDashboard from '../pages/auth/customer/CustomerDash'
-import EditCustomerInfo from '../pages/auth/customer/CustomerEdit'
+import CustomerDashboard from '../pages/customers/CustomerDash'
+import EditCustomerInfo from '../pages/customers/CustomerEdit'
 import RegisterVendor from '../pages/auth/vendor/VendorSignUp'
 import LoginVendor from '../pages/auth/vendor/VendorSignIn' 
-import VendorDashboard from '../pages/auth/vendor/VendorDash'
-import EditVendorInfo from '../pages/auth/vendor/VendorEdit'
+import VendorDashboard from '../pages/vendors/VendorDash'
+import EditVendorInfo from '../pages/vendors/VendorEdit'
 import HomePage from '../pages/HomePage'
+import SearchPage from '../pages/Search'
+import ForgotPassword from '../pages/auth/ForgotPass'
+import ChangePassword from '../pages/auth/ChangePass'
+import VerifyEmailNotification from '../pages/auth/verifyemail'
 
 
 const routes: IRoutes[] = [
@@ -37,14 +41,14 @@ const routes: IRoutes[] = [
         exact: true,
         component: CustomerDashboard,
         name: 'CustomerDash',
-        protected: false
+        protected: true
     },
     {
         path: '/CustomerEdit',
         exact: true,
         component: EditCustomerInfo,
         name: 'CustomerEdit',
-        protected: false
+        protected: true
     },
     {
         path: '/VendorSignUp',
@@ -65,27 +69,50 @@ const routes: IRoutes[] = [
         exact: true,
         component: VendorDashboard,
         name: 'VendorDash',
-        protected: false
+        protected: true
     },
     {
         path: '/VendorEdit',
         exact: true,
         component: EditVendorInfo,
         name: 'VendorEdit',
-        protected: false
+        protected: true
     },
     {
         path: '/HomePage',
         exact: true,
         component: HomePage,
         name: 'HomePage',
+        protected: true
+    },
+    {
+        path: '/Search',
+        exact: true,
+        component: SearchPage,
+        name: 'Search',
+        protected: true
+    },
+    {
+        path: '/ForgotPass',
+        exact: true,
+        component: ForgotPassword,
+        name: 'ForgotPass',
         protected: false
+    },
+    {
+        path: '/ChangePass',
+        exact: true,
+        component: ChangePassword,
+        name: 'ChangePass',
+        protected: true
+    },
+    {
+        path: '/verifyemail',
+        exact: true,
+        component: VerifyEmailNotification,
+        name: 'verifyemail',
+        protected: true
     }
 ]
 
 export default routes;
-
-//npm install -g firebase-tools
-//yarn add firebase-tools
-//$ firebase init
-//$ firebase deploy

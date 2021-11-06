@@ -1,0 +1,95 @@
+@use '../abstract/app' as a;
+
+.MuiBox-root-2{
+    margin-top: 80px;
+}
+
+.change-pass-wrapper{
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #fffdfd;
+    border-radius: 20px;
+}
+
+.change-pass-heading{
+    background-color: a.$background;
+    margin: 1rem 0.5rem;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+
+    .change-pass-header{
+        font-weight: 800;
+        line-height: 1.5;
+        font-size: 28px;
+        background-color: a.$background;
+        color: a.$font-color;
+        font-family: a.$font;
+    }
+}
+
+.form{
+    padding: 1rem;
+    padding-top: 0.5rem;
+    background-color: a.$background;
+}
+
+.big-grid{
+    background-color: a.$background;
+}
+
+.grid{
+    background-color: a.$background;
+    display: flex;
+}
+
+.MuiGrid-spacing-xs-2 > .MuiGrid-item{
+    background-color: a.$background;
+    padding: 8px;
+}
+
+.MuiFormLabel-root {
+    width: 100%;
+    color: a.$font-color;
+    font-family: a.$font;
+    font-weight: 600;
+    background-color: a.$background;
+}
+
+.change-button{
+    color: a.$font-color;
+    padding: 10px 0;
+    width: 100%;
+    margin: 4px 0;
+    background-color: a.$background;
+    border-radius: 12px;
+    border: 2px solid a.$font-color;
+    font-size: 18px;
+    font-weight: 800;
+    font-family: a.$font;
+}
+
+.change-button:hover{
+    background-color: a.$font-color;
+    color: a.$background;
+}
+
+.links{
+    background-color: a.$background;
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.nav-link{
+    font-size: 15px;
+    font-weight: 500;
+    padding: 0;
+    margin: 3px 0;
+    background-color: a.$background;
+    color: a.$font-color;
+    text-decoration: none;
+}

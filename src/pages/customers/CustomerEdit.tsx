@@ -1,9 +1,10 @@
 import React,{ useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { doc,setDoc } from 'firebase/firestore';
-import { db, auth } from '../../../config/firebase';
-import Grid from '@material-ui/core/Grid';
+import { db, auth } from '../../config/firebase';
 import TextField from '@material-ui/core/TextField';
+import { Box } from '@material-ui/core';
+import '../../styles/pages/edit.scss'
 
 const EditCustomerInfo = () => {
 
@@ -38,12 +39,15 @@ const EditCustomerInfo = () => {
         };
         const setDocRef = await setDoc(docRef, payload, {merge: true})
         }
+        history.push('/CustomerDash')
     }
 
     return(
-        <div>
-            <Grid container spacing={2}>
-                <Grid item xs={12} sm={12}>
+        <div className='edit-wrapper'>
+            <Box style={{backgroundColor: '#000000', borderRadius: '15px', margin: '20px'}}>
+                <h1>Edit Information</h1>
+                <div className='edit-container'>
+                <div>
                     <TextField
                     fullWidth
                     className='textfield'
@@ -53,8 +57,8 @@ const EditCustomerInfo = () => {
                     onChange={e=>setFirstname(e.target.value)}
                     value={firstname}
                     />
-                </Grid>
-                <Grid item xs={12} sm={12}>
+                </div>
+                <div>
                     <TextField
                     fullWidth
                     className='textfield'
@@ -64,8 +68,8 @@ const EditCustomerInfo = () => {
                     onChange={e=>setLastname(e.target.value)}
                     value={lastname}
                     />
-                </Grid>
-                <Grid item xs={12} sm={12}>
+                </div>
+                <div>
                     <TextField
                     fullWidth
                     className='textfield'
@@ -75,8 +79,8 @@ const EditCustomerInfo = () => {
                     onChange={e=>setEmail(e.target.value)}
                     value={email}
                     />
-                </Grid>
-                <Grid item xs={12} sm={12}>
+                </div>
+                <div>
                     <TextField
                     fullWidth
                     className='textfield'
@@ -86,10 +90,11 @@ const EditCustomerInfo = () => {
                     onChange={e=>setPhonenumber(e.target.value)}
                     value={phonenumber}
                     />
-                </Grid>
-            </Grid>
-            <button onClick={handleEdit}><Link to='/CustomerDash'>Save</Link></button>
-            <Link to='/CustomerDash'>Back to Dashboard</Link>
+                </div>
+                </div>
+                <button onClick={handleEdit} className='save-btn'>Save</button>
+                <Link to='/CustomerDash' className='back-link'>Back to Dashboard</Link>
+            </Box>
         </div>
     )
 }

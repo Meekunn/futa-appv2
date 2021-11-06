@@ -1,14 +1,20 @@
 import React from 'react';
 import { FC , useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { db, auth } from '../../../config/firebase';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import '../../../styles/customer/signup.scss';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel'
+import Input from '@material-ui/core/Input'
+import InputAdornment from '@material-ui/core/InputAdornment'
+import Visibility from '@material-ui/icons/Visibility'
+import VisibilityOff from '@material-ui/icons/VisibilityOff'
+import '../../../styles/pages/signup.scss';
 
 const RegisterVendor: FC<IVendors> = props => {
 
@@ -23,12 +29,21 @@ const RegisterVendor: FC<IVendors> = props => {
     const [phonenumber, setPhonenumber] = useState<string>('')
     const [location, setLocation] = useState<string>('')
     const [services, setServices] = useState<string>('')
+    const [showpass, setShowpass] = useState<boolean>(true)
+    const [showconfirm, setShowconfirm] = useState<boolean>(true)
 
     const history = useHistory();
 
     const switchToCustomer = () => {
         history.replace('/CustomerSignUp')
         console.log('switched to customer!')
+    }
+
+    const handleShowPassword = () => {
+        setShowpass(!showpass)
+    }
+    const handleShowConfirm = () => {
+        setShowconfirm(!showconfirm)
     }
 
     const handleNew = async (id: any) => {
@@ -40,18 +55,24 @@ const RegisterVendor: FC<IVendors> = props => {
             phonenumber,
             brandname,
             location,
-            services,
-            password
+            services
         };
         const setDocRef = await setDoc(docRef, payload)
     }
 
+    const verifyEmail = (user: any) => {
+        if(user) {
+            sendEmailVerification(user)
+            history.push('/verifyemail')
+        }
+    }
 
     const vendorSignUp = async (e: any) => {
         e.preventDefault();
 
         if(password !== confirm)
             setError('Password does not match.')
+            alert('Password does not match')
 
         if (error !== '')
             setError('');
@@ -60,20 +81,32 @@ const RegisterVendor: FC<IVendors> = props => {
 
         createUserWithEmailAndPassword(auth, email, password)
         .then( async (result:any) => {
-            await handleNew(result.user.uid)
-            history.replace('/VendorDash');
+            const user = auth.currentUser
+            if (user){verifyEmail(user)
+                await handleNew(result.user.uid)
+                if (user.emailVerified){
+                    history.replace('/VendorDash')
+                } 
+                else {
+                    history.replace('/verifyemail')
+                    console.log('verify your email')
+                }
+            }
         })
         .catch((error:any) => {
 
             if(error.code === 'auth/weak-password'){
                 setError('Please enter a strong password')
+                alert('Please enter a strong password')
             } 
             else if (error.code === 'auth/email-already-in-use') {
                 setError('Email is already in use')
+                alert('Email is already in use')
             } 
             else{
                 setError('Unable to Sign Up. Try again later.')
                 console.log({error})
+                alert('Oops, Try again later')
             }
 
             setSignUp(false);
@@ -101,10 +134,10 @@ const RegisterVendor: FC<IVendors> = props => {
 
     return(
         <Container maxWidth="sm">
-            <Box sx={{ width: 450, bgcolor: '#fffdfd', borderRadius: 20, display: 'flex',justifyContent: 'center', alignItems: 'center' }}>
+            <Box sx={{ width: 500, bgcolor: '#fffdfd', borderRadius: 20, display: 'flex',justifyContent: 'center', alignItems: 'center' }}>
                 <div className='signup-wrapper' >
                     <div className='signup-heading'>
-                        <h1>Sign Up</h1>
+                        <h1 className='signup-header'>Sign Up</h1>
                     </div>
                     <div className='form'>
                         <Grid container spacing={1} className='big-grid'>
@@ -232,52 +265,63 @@ const RegisterVendor: FC<IVendors> = props => {
                                 />    
                             </Grid> 
                             <Grid item xs={12} sm={12} className='grid' style={{backgroundColor: '#fffdfd'}}>
-                                <TextField 
-                                style= {{backgroundColor: '#fffdfd' }}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                autoComplete="current-password"
-                                name="password"
-                                required
-                                fullWidth
-                                id="password"
-                                label="Password"
-                                type='password'
-                                placeholder="********"
-                                autoFocus
-                                onChange={e=> setPassword(e.target.value)}
-                                value={password}
-                                />    
+                                <FormControl style={{ width: '100%', backgroundColor: '#fffdfd'}} >
+                                    <InputLabel htmlFor="standard-adornment-password" shrink={true} >Password</InputLabel>
+                                    <Input
+                                    style= {{backgroundColor: '#fffdfd' }}
+                                    id="standard-adornment-password"
+                                    type={showconfirm? 'password': 'text'}
+                                    placeholder="********"
+                                    required
+                                    onChange={e=>setPassword(e.target.value)}
+                                    value={password}
+                                    autoFocus
+                                    endAdornment={
+                                        <InputAdornment position='end'>
+                                            <button
+                                            style={{padding: '5px', backgroundColor: '#fffdfd', outline: 'none', border: 'none'}}
+                                            onClick={() => handleShowConfirm()}
+                                            >{showconfirm? <Visibility /> : <VisibilityOff />}
+                                            </button>
+                                        </InputAdornment>
+                                    }
+                                    />
+                                </FormControl> 
                             </Grid> 
                             <Grid item xs={12} sm={12} className='grid' style={{backgroundColor: '#fffdfd'}} >
-                                <TextField 
-                                style= {{backgroundColor: '#fffdfd' }}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                autoComplete="current-password"
-                                name="confirmPassword"
-                                required
-                                fullWidth
-                                id="confirmpassword"
-                                type="password"
-                                label="Confirm Password"
-                                placeholder="********"
-                                autoFocus
-                                onChange={e => setConfirm(e.target.value)}
-                                value={confirm}
-                                /> 
+                                <FormControl style={{ width: '100%', backgroundColor: '#fffdfd'}} >
+                                    <InputLabel htmlFor="standard-adornment-password" shrink={true} >Confirm Password</InputLabel>
+                                    <Input
+                                    style= {{backgroundColor: '#fffdfd' }}
+                                    id="standard-adornment-password"
+                                    type={showpass? 'password': 'text'}
+                                    placeholder="********"
+                                    required
+                                    onChange={e=>setConfirm(e.target.value)}
+                                    value={confirm}
+                                    autoFocus
+                                    endAdornment={
+                                        <InputAdornment position='end'>
+                                            <button
+                                            style={{padding: '5px', backgroundColor: '#fffdfd', outline: 'none', border: 'none'}}
+                                            onClick={() => handleShowPassword()}
+                                            >{showpass? <Visibility /> : <VisibilityOff />}
+                                            </button>
+                                        </InputAdornment>
+                                    }
+                                    />
+                                </FormControl> 
                             </Grid> 
                         </Grid>
                         <button className='signup-button'
                         onClick={vendorSignUp}
+                        disabled={signUp}
                         >Sign Up
                         </button>
                         <button className='signup-button' onClick={switchToCustomer}>Customer?</button>
-                        <p>Already have an account?<Link to="/VendorSignIn"> Sign In</Link></p>
+                        <p>Already have an account?<Link to="/VendorSignIn" className='p-link'> Sign In</Link></p>
                         <div className='links'>
-                            <Link to='/'>&#8592; Go to Home Page</Link>
+                            <Link to='/' className='nav-link'>&#8592; Go to Home Page</Link>
                         </div>
                     </div>
                 </div>
@@ -287,3 +331,4 @@ const RegisterVendor: FC<IVendors> = props => {
 }
 
 export default RegisterVendor;
+

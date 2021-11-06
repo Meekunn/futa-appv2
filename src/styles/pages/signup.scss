@@ -1,7 +1,7 @@
 @use '../abstract/app' as a;
 
 .MuiBox-root-2{
-    margin: 80px 0;
+    margin-top: 80px;
 }
 
 .signup-wrapper{
@@ -14,18 +14,18 @@
 
 .signup-heading{
     background-color: a.$background;
-    font-family: a.$font;
-    color: a.$font-color;
     margin: 1rem 0.5rem;
     padding: 0.5rem;
     display: flex;
     justify-content: space-between;
 
-    h1{
+    .signup-header{
         font-weight: 800;
         line-height: 1.5;
         font-size: 28px;
         background-color: a.$background;
+        color: a.$font-color;
+        font-family: a.$font;
     }
 }
 
@@ -41,6 +41,7 @@
 
 .grid{
     background-color: a.$background;
+    display: flex;
 }
 
 .MuiGrid-spacing-xs-2 > .MuiGrid-item{
@@ -52,23 +53,26 @@
     margin-bottom: 5px;
     background-color: a.$background;
 }
+.MuiFormControl-root input{
+    width: 100%;
+    color: a.$font-color;
+    font-family: a.$font;
+    font-weight: 600;
+    background-color: a.$background;
+}
 
-.MuiFormControl-root{
-    label{
-        color: a.$font-color;
-        font-family: a.$font;
-        font-weight: 600;
-    }
-    input{
-        color: a.$font-color;
-        font-family: a.$font;
-    }
-    span{
-        color: a.$font-color;
-        font-family: a.$font;
-        font-weight: 600;
-        background-color: a.$background;
-    }
+.MuiFormControl-root label{
+    width: 100%;
+    color: a.$font-color;
+    font-family: a.$font;
+    font-weight: 600;
+    background-color: a.$background;
+}
+.MuiFormLabel-asterisk{
+    color: a.$font-color;
+    font-family: a.$font;
+    font-weight: 600;
+    background-color: a.$background;
 }
 
 .MuiInputBase-root{
@@ -76,40 +80,42 @@
     background-color: a.$background;
     font-family: a.$font;
 } 
-
-.MuiFormLabel-root{
-    color: a.$background-color;
-    background-color: a.$background;
-    font-family: a.$font;
+.MuiInput-underline::before{
+    border-bottom: 2px solid grey;
 }
+
 .MuiInput-underline::after{
     border-bottom: 2px solid a.$font-color;
 }
+.MuiFormLabel-root {
+    width: 100%;
+    color: a.$font-color;
+    font-family: a.$font;
+    font-weight: 600;
+    background-color: a.$background;
+}
 
 .signup-button{
-    color: a.$background;
+    color: a.$font-color;
     padding: 10px 0;
     width: 100%;
     margin: 4px 0;
-    background-color: a.$font-color;
+    background-color: a.$background;
     border-radius: 12px;
     border: 2px solid a.$font-color;
     font-size: 18px;
     font-weight: 800;
     font-family: a.$font;
 }
-.signup-button:nth-child(1){
-    margin-top: 15px;
-}
 
 .signup-button:hover{
-    background-color: a.$background;
-    color: a.$font-color;
+    background-color: a.$font-color;
+    color: a.$background;
 }
 
 .links{
     background-color: a.$background;
-    margin-top: 0.5rem;
+    margin-top: 1.5rem;
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -127,38 +133,22 @@ p{
     width: 100%;
     text-align: center;
 
-    a{
+    .p-link{
         margin: 0;
         padding: 0;
-        color: a.$font-color
+        color: a.$font-color;
+        text-decoration: none;
+        background-color: a.$background;
     }
 }
-a{
+.nav-link{
     font-size: 15px;
+    font-weight: 500;
     padding: 0;
     margin: 3px 0;
     background-color: a.$background;
     color: a.$font-color;
-}
-
-.avatar {
-    color: a.$logo-color;
-    background-color: grey;
-    margin-top: 3rem;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    font-size: 25px;
-    flex-shrink: 0;
-    font-family: a.$logo-font;
-    line-height: 1;
-    border-radius: 50%;
-    display: flex;
-    overflow: hidden;
-    position: relative;
-    align-items: center;
-    flex-shrink: 0;
-    user-select: none;
+    text-decoration: none;
 }
 
 

@@ -1,9 +1,10 @@
 import React,{ useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { doc,setDoc } from 'firebase/firestore';
-import { db, auth } from '../../../config/firebase';
-import Grid from '@material-ui/core/Grid';
+import { db, auth } from '../../config/firebase';
+import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
+import '../../styles/pages/edit.scss'
 
 const EditVendorInfo = () => {
 
@@ -14,6 +15,7 @@ const EditVendorInfo = () => {
     const [brandname, setBrandname] = useState<string>('')
     const [location, setLocation] = useState<string>('')
     const [services, setServices] =useState<string>('')
+    const [bio, setBio] = useState<string>('')
     
     const history = useHistory();
     
@@ -27,7 +29,7 @@ const EditVendorInfo = () => {
         setBrandname(state?.brandname || '')
         setLocation(state?.location || '')
         setServices(state?.services || '')
-
+        setBio(state?.bio || '')
     }, [] )
 
 
@@ -47,13 +49,18 @@ const EditVendorInfo = () => {
         };
         const setDocRef = await setDoc(docRef, payload, {merge: true})
         }
+        history.push('/VendorDash')
     }
 
     return(
-        <div>
-            <Grid container spacing={2}>
-                <Grid item xs={12} sm={12}>
+        <div className='edit-wrapper'>
+            <Box style={{backgroundColor: '#000000', borderRadius: '15px', margin: '20px'}}>
+                <h1>Edit Information</h1>
+                <div className='edit-container'>
+                <div>
                     <TextField
+                    InputLabelProps={{className:'label'}}
+                    InputProps={{className: 'input'}}
                     fullWidth
                     className='textfield'
                     id="standard-disabled"
@@ -62,8 +69,8 @@ const EditVendorInfo = () => {
                     onChange={e=>setBrandname(e.target.value)}
                     value={brandname}
                     />
-                </Grid>
-                <Grid item xs={12} sm={12}>
+                </div>
+                <div>
                     <TextField
                     fullWidth
                     className='textfield'
@@ -73,8 +80,8 @@ const EditVendorInfo = () => {
                     onChange={e=>setFirstname(e.target.value)}
                     value={firstname}
                     />
-                </Grid>
-                <Grid item xs={12} sm={12}>
+                </div>
+                <div>
                     <TextField
                     fullWidth
                     className='textfield'
@@ -84,8 +91,8 @@ const EditVendorInfo = () => {
                     onChange={e=>setLastname(e.target.value)}
                     value={lastname}
                     />
-                </Grid>
-                <Grid item xs={12} sm={12}>
+                </div>
+                <div>
                     <TextField
                     fullWidth
                     className='textfield'
@@ -95,8 +102,8 @@ const EditVendorInfo = () => {
                     onChange={e=>setEmail(e.target.value)}
                     value={email}
                     />
-                </Grid>
-                <Grid item xs={12} sm={12}>
+                </div>
+                <div>
                     <TextField
                     fullWidth
                     className='textfield'
@@ -106,8 +113,8 @@ const EditVendorInfo = () => {
                     onChange={e=>setPhonenumber(e.target.value)}
                     value={phonenumber}
                     />
-                </Grid>
-                <Grid item xs={12} sm={12}>
+                </div>
+                <div>
                     <TextField
                     fullWidth
                     className='textfield'
@@ -117,8 +124,8 @@ const EditVendorInfo = () => {
                     onChange={e=>setLocation(e.target.value)}
                     value={location}
                     />
-                </Grid>
-                <Grid item xs={12} sm={12}>
+                </div>
+                <div>
                     <TextField
                     fullWidth
                     className='textfield'
@@ -128,10 +135,23 @@ const EditVendorInfo = () => {
                     onChange={e=>setServices(e.target.value)}
                     value={services}
                     />
-                </Grid>
-            </Grid>
-            <button onClick={handleEdit}><Link to='/VendorDash'>Save</Link></button>
-            <Link to='/VendorDash'>Back to Dashboard</Link>
+                </div>
+                <div>
+                    <TextField
+                    fullWidth
+                    multiline
+                    className='textfield'
+                    id="standard-disabled"
+                    label="Bio"
+                    variant="standard"
+                    onChange={e=>setBio(e.target.value)}
+                    value={bio}
+                    />
+                </div>
+            </div>
+            <button onClick={handleEdit} className='save-btn'>Save</button>
+            <Link to='/VendorDash' className='back-link'><li>Back to Dashboard</li></Link>
+            </Box>
         </div>
     )
 }

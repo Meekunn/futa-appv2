@@ -16,16 +16,16 @@ const Header =() => {
                 </div>
                 <div className='nav-bar'>
                     <div className='tabs'>
-                        <Link to='/' ><RoomIcon/><li>FIND OFFICE</li></Link>
+                        <Link to='/' className='a-link'><RoomIcon/><li>FIND OFFICE</li></Link>
                     </div>
                     <div className='tabs'>
-                        <Link to='/HomePage'><StoreIcon/><li>VENDORS</li></Link>
+                        <Link to='/HomePage' className='a-link'><StoreIcon/><li>VENDORS</li></Link>
                     </div>
                     <div className='tabs'>
-                        <Link to='/'><SearchIcon/><li>SEARCH</li></Link>
+                        <Link to='/Search' className='a-link'><SearchIcon/><li>SEARCH</li></Link>
                     </div>
                     <div className='tabs'>
-                        <Link to='/CustomerDash'><PersonIcon/><li>DASHBOARD</li></Link>
+                        <Link to='/CustomerDash' className='a-link'><PersonIcon/><li>DASHBOARD</li></Link>
                     </div>
                 </div>
             </div>
