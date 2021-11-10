@@ -1,4 +1,4 @@
-
+import MainPage from '../pages/MainPage'
 import RegisterCustomer from '../pages/auth/customer/CustomerSignUp'
 import LoginCustomer from '../pages/auth/customer/CustomerSignIn'
 import CustomerDashboard from '../pages/customers/CustomerDash'
