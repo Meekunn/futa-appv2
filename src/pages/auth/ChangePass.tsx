@@ -39,31 +39,31 @@ const ChangePassword = () => {
     const changePasswordRequest = () => {
         if (password !== confirm)
         {
-            setError('Make sure your passwords are matching');
-            return;
+            setError('Make sure your passwords are matching')
+            return
         }
 
-        if (error !== '') setError('');
+        if (error !== '') setError('')
 
-        setChanging(true);
+        setChanging(true)
 
         const user = auth.currentUser
         if (user){
             updatePassword(user, password)
             .then(() => {
-                console.log('Password change successful.');
-                history.push('/');
+                alert('Password change successful.')
+                history.push('/')
             })
             .catch((error: any) => {
-                console.log(error);
-                setChanging(false);
-                setError(error.message);
+                alert(error)
+                setChanging(false)
+                setError(error.message)
             })
         }
     }
 
     if (auth.currentUser?.providerData[0]?.providerId !== 'password')
-        return <Redirect to="/" />;
+        return <Redirect to="/" />
 
     return(
         <Container maxWidth="sm">
@@ -154,7 +154,7 @@ const ChangePassword = () => {
                         >Change Password
                         </button>
                         <div className='links'>
-                            <Link to='/' className='nav-link'>&#8592; Home Page</Link>
+                            <Link to='/' className='nav-link'>&#8592 Home Page</Link>
                         </div>
                     </div>
                 </div>

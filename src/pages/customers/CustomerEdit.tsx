@@ -1,19 +1,19 @@
-import React,{ useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { doc,setDoc } from 'firebase/firestore';
-import { db, auth } from '../../config/firebase';
-import TextField from '@material-ui/core/TextField';
-import { Box } from '@material-ui/core';
+import React,{ useState, useEffect } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import { doc,setDoc } from 'firebase/firestore'
+import { db, auth } from '../../config/firebase'
+import TextField from '@material-ui/core/TextField'
+import { Box } from '@material-ui/core'
 import '../../styles/pages/edit.scss'
 
 const EditCustomerInfo = () => {
 
-    const [email, setEmail] = useState<string>('');
+    const [email, setEmail] = useState<string>('')
     const [firstname, setFirstname] = useState<string>('')
     const [lastname, setLastname] = useState<string>('')
     const [phonenumber, setPhonenumber] = useState<string>('')
     
-    const history = useHistory();
+    const history = useHistory()
     
     useEffect(() => {
 
@@ -27,7 +27,7 @@ const EditCustomerInfo = () => {
 
 
     const handleEdit = async () => {
-        const user = auth.currentUser;
+        const user = auth.currentUser
         if(user !== null){
             const uid = user.uid
             const docRef = doc(db, "customers", uid) 
@@ -36,7 +36,7 @@ const EditCustomerInfo = () => {
             lastname,
             email,
             phonenumber,
-        };
+        }
         const setDocRef = await setDoc(docRef, payload, {merge: true})
         }
         history.push('/CustomerDash')
@@ -99,4 +99,4 @@ const EditCustomerInfo = () => {
     )
 }
 
-export default EditCustomerInfo;
+export default EditCustomerInfo

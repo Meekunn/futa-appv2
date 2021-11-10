@@ -27,4 +27,4 @@ const VendorCard= ({...vendor}) => {
     )
 }
 
-export default VendorCard;
+export default VendorCard

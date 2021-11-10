@@ -8,10 +8,10 @@ import '../styles/components/homepage.scss'
 
 const HomePage = () => {
 
-    const [vendors, setVendors] = useState<any>([{brandname: '', phonenumber: '', services: '',location: '', email: '', bio:'' }]);
+    const [vendors, setVendors] = useState<any>([{brandname: '', phonenumber: '', services: '',location: '', email: '', bio:'' }])
 
     useEffect(() => {
-        getVendors();
+        getVendors()
     }, [])
 
     
@@ -58,4 +58,4 @@ const HomePage = () => {
     )
 }
 
-export default HomePage;
+export default HomePage

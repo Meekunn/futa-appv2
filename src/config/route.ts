@@ -115,4 +115,4 @@ const routes: IRoutes[] = [
     }
 ]
 
-export default routes;
+export default routes

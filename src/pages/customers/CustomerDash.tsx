@@ -1,26 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { onAuthStateChanged, signOut, updatePassword, sendPasswordResetEmail } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
-import { db, auth } from '../../config/firebase';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
+import React, { useState, useEffect } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import { onAuthStateChanged, signOut, updatePassword, sendPasswordResetEmail } from 'firebase/auth'
+import { doc, getDoc } from 'firebase/firestore'
+import { db, auth } from '../../config/firebase'
+import Box from '@material-ui/core/Box'
+import Grid from '@material-ui/core/Grid'
+import TextField from '@material-ui/core/TextField'
 import EditIcon from '@material-ui/icons/Edit'
-import Image from '../../assets/image/signin.jpg';
-import Header from '../../components/Header';
-import '../../styles/pages/dashboard.scss';
+import Image from '../../assets/image/signin.jpg'
+import Header from '../../components/Header'
+import '../../styles/pages/dashboard.scss'
 
 
 const CustomerDashboard = () => {
 
-    const [dashboard, setDashboard] = useState<any>({});
-    const [mail, setMail] = useState<string>('');
-    const [fName, setFName] = useState<string>('');
-    const [lName, setLName] = useState<string>('');
-    const [pNumber, setPNumber] = useState<string>('');
+    const [dashboard, setDashboard] = useState<any>({})
+    const [mail, setMail] = useState<string>('')
+    const [fName, setFName] = useState<string>('')
+    const [lName, setLName] = useState<string>('')
+    const [pNumber, setPNumber] = useState<string>('')
 
-    const history = useHistory();
+    const history = useHistory()
 
         
     useEffect(() => {
@@ -30,10 +30,10 @@ const CustomerDashboard = () => {
     const userOnline = () => {
         onAuthStateChanged (auth, async (user: any) => {
             if(user){
-                const uid = user.uid;
+                const uid = user.uid
                 getUserInfo(uid)
             } else{
-                console.log('no info found')
+                return
             }
         })
     }
@@ -56,8 +56,8 @@ const CustomerDashboard = () => {
     .then((result:any) => {
         history.replace('/CustomerSignIn')
     }).catch((error: any) => {
-        console.log('Error in signing out')
-    });
+        alert('Error in signing out')
+    })
     } 
 
     return(
@@ -142,7 +142,7 @@ const CustomerDashboard = () => {
     )
 }
 
-export default CustomerDashboard;
+export default CustomerDashboard
 
 
                     

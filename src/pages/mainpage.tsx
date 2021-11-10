@@ -1,5 +1,4 @@
-//import React from 'react';
-import MainHeader from '../components/MainHeader';
+import MainHeader from '../components/MainHeader'
 import '../styles/pages/mainpage.scss'
 
 const MainPage = () => {
@@ -11,4 +10,4 @@ const MainPage = () => {
     )
 }
 
-export default MainPage;
+export default MainPage

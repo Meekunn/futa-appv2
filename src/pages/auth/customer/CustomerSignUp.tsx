@@ -34,7 +34,6 @@ const RegisterCustomer: FC<IPageProps> = (props: any) => {
 
     const switchToVendor = () => {
         history.replace('/VendorSignUp')
-        console.log('switched to vendor!')
     }
 
     const handleShowPassword = () => {
@@ -52,9 +51,8 @@ const RegisterCustomer: FC<IPageProps> = (props: any) => {
             lastname,
             email,
             phonenumber
-        };
+        }
         const setDocRef = await setDoc(docRef, payload)
-        console.log(setDocRef)
     }
 
     const verifyEmail = (user: any) => {
@@ -65,16 +63,16 @@ const RegisterCustomer: FC<IPageProps> = (props: any) => {
     }
 
     const customerSignUp = (e: any) => {
-        e.preventDefault();
+        e.preventDefault()
 
         if(password !== confirm)
             setError('Password does not match.')
             alert('Password does not match')
 
         if (error !== '')
-            setError('');
+            setError('')
 
-        setSignUp(true);
+        setSignUp(true)
         createUserWithEmailAndPassword(auth, email, password)
         .then( async (result:any) => {   
             const user = auth.currentUser
@@ -102,21 +100,20 @@ const RegisterCustomer: FC<IPageProps> = (props: any) => {
             else{
                 setError('Unable to Sign Up. Try again later.')
                 alert('Ooops, try again later')
-                console.log({error})
             }
 
-            setSignUp(false);
-            setEmail('');
-            setPassword('');
-            setConfirm('');
+            setSignUp(false)
+            setEmail('')
+            setPassword('')
+            setConfirm('')
             setFirstname('')
             setLastname('')
             setPhonenumber('')
-        });
+        })
 
-        setEmail('');
-        setPassword('');
-        setConfirm('');
+        setEmail('')
+        setPassword('')
+        setConfirm('')
         setFirstname('')
         setLastname('')
         setPhonenumber('')
@@ -271,4 +268,4 @@ const RegisterCustomer: FC<IPageProps> = (props: any) => {
     )
 }
 
-export default RegisterCustomer;
+export default RegisterCustomer

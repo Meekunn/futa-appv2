@@ -19,11 +19,10 @@ const  SearchPage = () => {
     const getVendorsData = async () => {
         try{
             const response = await axios.get('https://us-central1-my-app-e4b5c.cloudfunctions.net/app/vendors')
-            console.log(response)
             const data = response.data
             setVendorsData(data)
         } catch (error){
-            console.log(error)
+            return
         }
     }
 
@@ -31,7 +30,6 @@ const  SearchPage = () => {
       setSearchBrandname(trimText(val))
       if(searchBrandname || searchLocation === ""){
         return setSearchOutput([])
-        console.log(searchOutput)
       }
     }
   
@@ -67,6 +65,6 @@ const  SearchPage = () => {
     )
   }
   
-  export default SearchPage;
+  export default SearchPage
   
   

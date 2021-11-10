@@ -1,4 +1,3 @@
-//import React from 'react';
 import { Link } from 'react-router-dom'
 import '../styles/components/mainheader.scss'
 
@@ -21,4 +20,4 @@ const MainHeader = () => {
     )
 }
 
-export default MainHeader;
+export default MainHeader

@@ -1,14 +1,14 @@
-import React,{ useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { doc,setDoc } from 'firebase/firestore';
-import { db, auth } from '../../config/firebase';
-import Box from '@material-ui/core/Box';
-import TextField from '@material-ui/core/TextField';
+import React,{ useState, useEffect } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import { doc,setDoc } from 'firebase/firestore'
+import { db, auth } from '../../config/firebase'
+import Box from '@material-ui/core/Box'
+import TextField from '@material-ui/core/TextField'
 import '../../styles/pages/edit.scss'
 
 const EditVendorInfo = () => {
 
-    const [email, setEmail] = useState<string>('');
+    const [email, setEmail] = useState<string>('')
     const [firstname, setFirstname] = useState<string>('')
     const [lastname, setLastname] = useState<string>('')
     const [phonenumber, setPhonenumber] = useState<string>('')
@@ -17,7 +17,7 @@ const EditVendorInfo = () => {
     const [services, setServices] =useState<string>('')
     const [bio, setBio] = useState<string>('')
     
-    const history = useHistory();
+    const history = useHistory()
     
     useEffect(() => {
 
@@ -34,7 +34,7 @@ const EditVendorInfo = () => {
 
 
     const handleEdit = async () => {
-        const user = auth.currentUser;
+        const user = auth.currentUser
         if(user !== null){
             const uid = user.uid
             const docRef = doc(db, "vendors", uid) 
@@ -46,7 +46,7 @@ const EditVendorInfo = () => {
             brandname,
             location,
             services
-        };
+        }
         const setDocRef = await setDoc(docRef, payload, {merge: true})
         }
         history.push('/VendorDash')
@@ -156,4 +156,4 @@ const EditVendorInfo = () => {
     )
 }
 
-export default EditVendorInfo;
+export default EditVendorInfo

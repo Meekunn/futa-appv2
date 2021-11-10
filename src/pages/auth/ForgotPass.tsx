@@ -8,25 +8,25 @@ import Box from '@material-ui/core/Box'
 import '../../styles/pages/forgotpass.scss'
 
 const ForgotPassword = () => {
-    const [sending, setSending] = useState<boolean>(false);
-    const [sent, setSent] = useState<boolean>(false);
-    const [email, setEmail] = useState<string>('');
-    const [error, setError] = useState<string>('');
+    const [sending, setSending] = useState<boolean>(false)
+    const [sent, setSent] = useState<boolean>(false)
+    const [email, setEmail] = useState<string>('')
+    const [error, setError] = useState<string>('')
 
     const resetPasswordRequest = () => {
-        if (error !== '') setError('');
+        if (error !== '') setError('')
 
-        setSending(true);
+        setSending(true)
 
         sendPasswordResetEmail(auth, email)
         .then(() => {
-            setSent(true);
-            setSending(false);
+            setSent(true)
+            setSending(false)
         })
         .catch((error: any) => {
-            setError(error.message);
-            setSending(false);
-        });
+            setError(error.message)
+            setSending(false)
+        })
     }
 
     return (
@@ -34,7 +34,7 @@ const ForgotPassword = () => {
             { sent ? 
                 <div>
                     <p className='pass-email-sent'>Check Your Email for a Link and Instructions</p>
-                    <Link to='/' className='nav-link'>&#8592; Go to Home Page</Link>
+                    <Link to='/' className='nav-link'>&#8592 Go to Home Page</Link>
                 </div>
             :
                 <Box sx={{ marginTop:'100px', width: '500px', bgcolor: '#fffdfd', borderRadius: 5, display: 'flex',justifyContent: 'center', alignItems: 'center' }}>
@@ -63,7 +63,7 @@ const ForgotPassword = () => {
                 </div>
                 <button disabled={sending} className='forgot-btn' onClick={resetPasswordRequest}>Submit</button>
                 <div className='links'>
-                    <Link to='/' className='nav-link'>&#8592; Go to Home Page</Link>
+                    <Link to='/' className='nav-link'>&#8592 Go to Home Page</Link>
                 </div>
                 </div>
             </Box>

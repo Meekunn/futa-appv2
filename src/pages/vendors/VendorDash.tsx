@@ -63,7 +63,7 @@ const VendorDashboard = () => {
     .then((result:any) => {
         history.replace('/VendorSignIn')
     }).catch((error: any) => {
-        console.log('Error in signing out')
+        alert('Error in signing out')
     })
    } 
 

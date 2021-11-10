@@ -1,28 +1,28 @@
-import React from 'react';
-import { FC , useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
-import { db, auth } from '../../../config/firebase';
-import TextField from '@material-ui/core/TextField';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import FormControl from '@material-ui/core/FormControl';
+import React from 'react'
+import { FC , useState } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
+import { doc, setDoc } from 'firebase/firestore'
+import { db, auth } from '../../../config/firebase'
+import TextField from '@material-ui/core/TextField'
+import Container from '@material-ui/core/Container'
+import Grid from '@material-ui/core/Grid'
+import Box from '@material-ui/core/Box'
+import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
 import Input from '@material-ui/core/Input'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
-import '../../../styles/pages/signup.scss';
+import '../../../styles/pages/signup.scss'
 
 const RegisterVendor: FC<IVendors> = props => {
 
-    const [signUp, setSignUp] = useState<boolean>(false);
-    const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-    const [confirm, setConfirm] = useState<string>('');
-    const [error, setError] = useState<string>('');
+    const [signUp, setSignUp] = useState<boolean>(false)
+    const [email, setEmail] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
+    const [confirm, setConfirm] = useState<string>('')
+    const [error, setError] = useState<string>('')
     const [firstname, setFirstname] = useState<string>('')
     const [lastname, setLastname] = useState<string>('')
     const [brandname, setBrandname] = useState<string>('')
@@ -32,11 +32,10 @@ const RegisterVendor: FC<IVendors> = props => {
     const [showpass, setShowpass] = useState<boolean>(true)
     const [showconfirm, setShowconfirm] = useState<boolean>(true)
 
-    const history = useHistory();
+    const history = useHistory()
 
     const switchToCustomer = () => {
         history.replace('/CustomerSignUp')
-        console.log('switched to customer!')
     }
 
     const handleShowPassword = () => {
@@ -56,9 +55,8 @@ const RegisterVendor: FC<IVendors> = props => {
             brandname,
             location,
             services
-        };
+        }
         const setDocRef = await setDoc(docRef, payload)
-        console.log(setDocRef)
     }
 
     const verifyEmail = (user: any) => {
@@ -69,16 +67,16 @@ const RegisterVendor: FC<IVendors> = props => {
     }
 
     const vendorSignUp = async (e: any) => {
-        e.preventDefault();
+        e.preventDefault()
 
         if(password !== confirm)
             setError('Password does not match.')
             alert('Password does not match')
 
         if (error !== '')
-            setError('');
+            setError('')
 
-        setSignUp(true);
+        setSignUp(true)
 
         createUserWithEmailAndPassword(auth, email, password)
         .then( async (result:any) => {
@@ -90,7 +88,6 @@ const RegisterVendor: FC<IVendors> = props => {
                 } 
                 else {
                     history.replace('/verifyemail')
-                    console.log('verify your email')
                 }
             }
         })
@@ -106,25 +103,24 @@ const RegisterVendor: FC<IVendors> = props => {
             } 
             else{
                 setError('Unable to Sign Up. Try again later.')
-                console.log({error})
                 alert('Oops, Try again later')
             }
 
-            setSignUp(false);
-            setEmail('');
-            setPassword('');
-            setConfirm('');
+            setSignUp(false)
+            setEmail('')
+            setPassword('')
+            setConfirm('')
             setFirstname('')
             setLastname('')
             setBrandname('')
             setLocation('')
             setServices('')
             setPhonenumber('')
-        });
+        })
 
-        setEmail('');
-        setPassword('');
-        setConfirm('');
+        setEmail('')
+        setPassword('')
+        setConfirm('')
         setFirstname('')
         setLastname('')
         setBrandname('')
@@ -322,7 +318,7 @@ const RegisterVendor: FC<IVendors> = props => {
                         <button className='signup-button' onClick={switchToCustomer}>Customer?</button>
                         <p>Already have an account?<Link to="/VendorSignIn" className='p-link'> Sign In</Link></p>
                         <div className='links'>
-                            <Link to='/' className='nav-link'>&#8592; Go to Home Page</Link>
+                            <Link to='/' className='nav-link'>&#8592 Go to Home Page</Link>
                         </div>
                     </div>
                 </div>
@@ -331,5 +327,5 @@ const RegisterVendor: FC<IVendors> = props => {
     )
 }
 
-export default RegisterVendor;
+export default RegisterVendor
 
