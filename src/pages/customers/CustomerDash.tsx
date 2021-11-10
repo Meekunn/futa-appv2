@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { onAuthStateChanged, signOut, updatePassword, sendPasswordResetEmail } from 'firebase/auth'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { doc, getDoc } from 'firebase/firestore'
 import { db, auth } from '../../config/firebase'
 import Box from '@material-ui/core/Box'
@@ -67,7 +67,7 @@ const CustomerDashboard = () => {
                 <div className='dash-wrapper'>
                     <div className='dash-heading'>
                         <div className='img-container'>
-                            <img src={Image} />
+                            <img src={Image} alt="profile"/>
                         </div>
                         <h1>Hi, {fName}</h1>
                         <Link to={{
